@@ -506,6 +506,9 @@ if "darwin" == os.sys.platform:
        env.Append( EXTRACPPPATH=filterExists(["/sw/include" , "/opt/local/include"]) )
        env.Append( EXTRALIBPATH=filterExists(["/sw/lib/", "/opt/local/lib"]) )
 
+    if static:
+        env.Append( LINKFLAGS=" -static " )
+
 elif os.sys.platform.startswith("linux"):
     linux = True
     platform = "linux"
