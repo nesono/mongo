@@ -190,6 +190,9 @@ add_option( "pch" , "use precompiled headers to speed up the build (experimental
 add_option( "distcc" , "use distcc for distributing builds" , 0 , False )
 add_option( "clang" , "use clang++ rather than g++ (experimental)" , 0 , True )
 
+# options added by METEOR
+add_option( "openssl", "Library path to openssl" , 1 , False )
+
 # debugging/profiling help
 if os.sys.platform.startswith("linux") and (os.uname()[-1] == 'x86_64'):
     defaultAllocator = 'tcmalloc'
@@ -526,6 +529,9 @@ if "darwin" == os.sys.platform:
        env.Append( EXTRACPPPATH=filterExists(["/sw/include" , "/opt/local/include"]) )
        env.Append( EXTRALIBPATH=filterExists(["/sw/lib/", "/opt/local/lib"]) )
 
+    if static:
+        env.Append( LINKFLAGS=" -static " )
+
 elif os.sys.platform.startswith("linux"):
     linux = True
     platform = "linux"
@@ -782,9 +788,16 @@ if has_option( "ssl" ):
     if windows:
         env.Append( LIBS=["libeay32"] )
         env.Append( LIBS=["ssleay32"] )
+    elif darwin:
+        env.Append( LIBS=[File(os.path.join(get_option('openssl'), 'libssl.a'))] )
+        env.Append( LIBS=[File(os.path.join(get_option('openssl'), 'libcrypto.a'))] )
+        env.Append( LIBS=["z"] )
+        env.Append( LIBS=["dl"] )
     else:
         env.Append( LIBS=["ssl"] )
         env.Append( LIBS=["crypto"] )
+        env.Append( LIBS=["z"] )
+        env.Append( LIBS=["dl"] )
 
 try:
     umask = os.umask(022)
