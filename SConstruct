@@ -785,6 +785,7 @@ if has_option( "ssl" ):
     else:
         env.Append( LIBS=["ssl"] )
         env.Append( LIBS=["crypto"] )
+        env.Append( LIBS=["z"] )
 
 try:
     umask = os.umask(022)
