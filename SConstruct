@@ -767,6 +767,7 @@ if has_option( "ssl" ):
         env.Append( LIBS=["libeay32"] )
         env.Append( LIBS=["ssleay32"] )
     else:
+        env.Append( LIBS=["dl"] )
         env.Append( LIBS=["ssl"] )
         env.Append( LIBS=["crypto"] )
         env.Append( LIBS=["z"] )
