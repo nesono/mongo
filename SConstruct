@@ -769,10 +769,10 @@ if has_option( "ssl" ):
     elif darwin:
         env.Append( LIBS=[File('/usr/local/Cellar/openssl/1.0.1e/lib/libssl.a')] )
     else:
-        env.Append( LIBS=["dl"] )
         env.Append( LIBS=["ssl"] )
         env.Append( LIBS=["crypto"] )
         env.Append( LIBS=["z"] )
+        env.Append( LIBS=["dl"] )
 
 try:
     umask = os.umask(022)
