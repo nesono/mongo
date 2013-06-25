@@ -781,6 +781,8 @@ if has_option( "ssl" ):
     if windows:
         env.Append( LIBS=["libeay32"] )
         env.Append( LIBS=["ssleay32"] )
+    elif darwin:
+        env.Append( LIBS=[File('/usr/local/Cellar/openssl/1.0.1e/lib/libssl.a')] )
     else:
         env.Append( LIBS=["dl"] )
         env.Append( LIBS=["ssl"] )
