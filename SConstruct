@@ -768,6 +768,9 @@ if has_option( "ssl" ):
         env.Append( LIBS=["ssleay32"] )
     elif darwin:
         env.Append( LIBS=[File('/usr/local/Cellar/openssl/1.0.1e/lib/libssl.a')] )
+        env.Append( LIBS=[File('/usr/local/Cellar/openssl/1.0.1e/lib/libcrypto.a')] )
+        env.Append( LIBS=["z"] )
+        env.Append( LIBS=["dl"] )
     else:
         env.Append( LIBS=["ssl"] )
         env.Append( LIBS=["crypto"] )
