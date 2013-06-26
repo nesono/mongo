@@ -190,6 +190,9 @@ add_option( "pch" , "use precompiled headers to speed up the build (experimental
 add_option( "distcc" , "use distcc for distributing builds" , 0 , False )
 add_option( "clang" , "use clang++ rather than g++ (experimental)" , 0 , True )
 
+# options added by METEOR
+add_option( "openssl", "Library path to openssl" , 1 , True )
+
 # debugging/profiling help
 if os.sys.platform.startswith("linux") and (os.uname()[-1] == 'x86_64'):
     defaultAllocator = 'tcmalloc'
@@ -767,8 +770,8 @@ if has_option( "ssl" ):
         env.Append( LIBS=["libeay32"] )
         env.Append( LIBS=["ssleay32"] )
     elif darwin:
-        env.Append( LIBS=[File('/usr/local/Cellar/openssl/1.0.1e/lib/libssl.a')] )
-        env.Append( LIBS=[File('/usr/local/Cellar/openssl/1.0.1e/lib/libcrypto.a')] )
+        env.Append( LIBS=[File(os.path.join(get_option('openssl'), 'libssl.a'))] )
+        env.Append( LIBS=[File(os.path.join(get_option('openssl'), 'libcrypto.a'))] )
         env.Append( LIBS=["z"] )
         env.Append( LIBS=["dl"] )
     else:
