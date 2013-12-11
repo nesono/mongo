@@ -757,7 +757,7 @@ namespace replset {
                 // TODO : SET NOT SECONDARY here?
                 sleepsecs(60);
             }
-            sleepsecs(1);
+            sleepmillis(100);
         }
     }
 

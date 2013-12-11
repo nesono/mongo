@@ -782,7 +782,7 @@ namespace mongo {
                         log() << "replSet can't get " << rsConfigNs << " config from self or any seed (yet)" << rsLog;
                     }
 
-                    sleepsecs(1);
+                    sleepmillis(100);
                     continue;
                 }
 
