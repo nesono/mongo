@@ -902,6 +902,10 @@ if has_option( "ssl" ):
         env.Append( LIBS=[File(os.path.join(get_option('openssl'), 'libcrypto.a'))] )
         env.Append( LIBS=["z"] )
         env.Append( LIBS=["dl"] )
+    elif freebsd:
+        env.Append( LIBS=["ssl"] )
+        env.Append( LIBS=["crypto"] )
+        env.Append( LIBS=["z"] )
     else:
         env.Append( LIBS=["ssl"] )
         env.Append( LIBS=["crypto"] )
